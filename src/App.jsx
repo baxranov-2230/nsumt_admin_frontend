@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,7 +9,8 @@ import { Menu, Globe2, Bell } from "lucide-react";
 import HemisLogo from "./components/HemisLogo";
 import Sidebar from "./components/Sidebar";
 import Dashboard from "./pages/Dashboard";
-import StudyPlan from "./pages/StudyPlan";
+import CreateFaculty from "./pages/CreateFaculty.jsx";
+import CreateCategory from "./pages/CreateCategory.jsx";
 import Schedule from "./pages/Schedule";
 import Groups from "./pages/Groups";
 import Subjects from "./pages/Subjects";
@@ -23,15 +24,18 @@ import Payments from "./pages/Payments";
 import Scholarship from "./pages/Scholarship";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
+import { Toaster } from "react-hot-toast";
+import CategoryList from "./pages/CategoryList.jsx";
+
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-100 flex flex-col">
+
+      <div className="min-h-screen  flex flex-col">
         {/* Header */}
-        <header className="bg-[#2557A7] text-white fixed w-full z-10">
+        <header className="bg-[#3697A5] text-white fixed w-full z-10">
           <div className="px-4">
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center space-x-4">
@@ -68,7 +72,9 @@ function App() {
           >
             <Routes>
               <Route path="/" element={<Dashboard />} />
-              <Route path="/study-plan" element={<StudyPlan />} />
+              <Route path="/create-faculty" element={<CreateFaculty />} />
+              <Route path="/create-category" element={<CreateCategory />} />
+              <Route path="/list-category" element={<CategoryList />} />
               <Route path="/schedule" element={<Schedule />} />
               <Route path="/groups" element={<Groups />} />
               <Route path="/subjects" element={<Subjects />} />
@@ -82,11 +88,13 @@ function App() {
               <Route path="/scholarship" element={<Scholarship />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/settings" element={<Settings />} />
+
             </Routes>
+            <Toaster />
           </main>
         </div>
       </div>
-    </Router>
+
   );
 }
 
