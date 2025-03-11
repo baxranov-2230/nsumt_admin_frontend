@@ -25,7 +25,7 @@ import {
 
 function Sidebar({isOpen}) {
     const location = useLocation();
-    const [expandedCategories, setExpandedCategories] = useState(["academic"]);
+    const [expandedCategories, setExpandedCategories] = useState(["/"]);
 
     const toggleCategory = (category) => {
         setExpandedCategories((prev) =>
@@ -57,45 +57,45 @@ function Sidebar({isOpen}) {
                 {icon: CiViewList, label: "Hamma kategoriyalar", path: "/list-category"},
             ],
         },
-        {
-            id: "academics",
-            title: "O'quv jarayoni",
-            items: [
-                {icon: BookOpen, label: "O'quv reja", path: "/study-plan"},
-                {icon: Calendar, label: "Dars jadvali", path: "/schedule"},
-                {icon: Users, label: "Guruhlar", path: "/groups"},
-                {icon: GraduationCap, label: "Fanlar", path: "/subjects"},
-                {icon: ClipboardList, label: "Nazoratlar", path: "/controls"},
-                {icon: Award, label: "Reyting daftarcha", path: "/rating-book"},
-                {icon: BookCheck, label: "Davomatlar", path: "/attendance"},
-                {icon: BookCheck, label: "Department", path: "/department"},
-            ],
-        },
-        {
-            id: "documents",
-            title: "Hujjatlar",
-            items: [
-                {icon: ScrollText, label: "Arizalar", path: "/applications"},
-                {icon: FileText, label: "Qaydnomalar", path: "/records"},
-                {icon: Building2, label: "Shartnomalar", path: "/contracts"},
-            ],
-        },
-        {
-            id: "finance",
-            title: "Moliya",
-            items: [
-                {icon: CreditCard, label: "To'lovlar", path: "/payments"},
-                {icon: Wallet, label: "Stipendiya", path: "/scholarship"},
-            ],
-        },
-        {
-            id: "settings",
-            title: "Sozlamalar",
-            items: [
-                {icon: UserCircle, label: "Profil", path: "/profile"},
-                {icon: Settings, label: "Tizim", path: "/settings"},
-            ],
-        },
+        // {
+        //     id: "academics",
+        //     title: "O'quv jarayoni",
+        //     items: [
+        //         {icon: BookOpen, label: "O'quv reja", path: "/study-plan"},
+        //         {icon: Calendar, label: "Dars jadvali", path: "/schedule"},
+        //         {icon: Users, label: "Guruhlar", path: "/groups"},
+        //         {icon: GraduationCap, label: "Fanlar", path: "/subjects"},
+        //         {icon: ClipboardList, label: "Nazoratlar", path: "/controls"},
+        //         {icon: Award, label: "Reyting daftarcha", path: "/rating-book"},
+        //         {icon: BookCheck, label: "Davomatlar", path: "/attendance"},
+        //         {icon: BookCheck, label: "Department", path: "/department"},
+        //     ],
+        // },
+        // {
+        //     id: "documents",
+        //     title: "Hujjatlar",
+        //     items: [
+        //         {icon: ScrollText, label: "Arizalar", path: "/applications"},
+        //         {icon: FileText, label: "Qaydnomalar", path: "/records"},
+        //         {icon: Building2, label: "Shartnomalar", path: "/contracts"},
+        //     ],
+        // },
+        // {
+        //     id: "finance",
+        //     title: "Moliya",
+        //     items: [
+        //         {icon: CreditCard, label: "To'lovlar", path: "/payments"},
+        //         {icon: Wallet, label: "Stipendiya", path: "/scholarship"},
+        //     ],
+        // },
+        // {
+        //     id: "settings",
+        //     title: "Sozlamalar",
+        //     items: [
+        //         {icon: UserCircle, label: "Profil", path: "/profile"},
+        //         {icon: Settings, label: "Tizim", path: "/settings"},
+        //     ],
+        // },
     ];
 
     return (
