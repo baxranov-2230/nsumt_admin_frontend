@@ -6,7 +6,6 @@ function Profile() {
     personal: {
       fullName: "John Smith",
       birthDate: "1999-05-15",
-      birthDat: "1999-05-15",
       passport: "AA1234567",
       phone: "+998 90 123 45 67",
       email: "john.smith@example.com",
