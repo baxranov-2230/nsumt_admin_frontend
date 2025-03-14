@@ -1,9 +1,7 @@
 import axios from "axios";
 // import { getCurrentUser } from "./AuthService/LoginApi";
 const API_URL = "http://127.0.0.2:8000/v1/category";
-// import axiosInstance from "./axiosInstance";
-
-
+import axiosInstance from "./axiosInstance";
 
 
 export const GetAllCategory = async () => {
@@ -13,7 +11,7 @@ export const GetAllCategory = async () => {
 
 export const CreateCategoryApi = async (categoryDate) => {
     try {
-        const response = await axios.post(
+        const response = await axiosInstance.post(
             `${API_URL}/add_category`,
             {
                 name_uz: categoryDate.name_uz,
@@ -31,7 +29,7 @@ export const CreateCategoryApi = async (categoryDate) => {
     }
 };
 export const DeleteCategory = async (categoryId) => {
-    const Category = await axios.delete(
+    const Category = await axiosInstance.delete(
         `${API_URL}/delete_category/${categoryId}`
         // {
         //   method: "DELETE",
@@ -44,20 +42,19 @@ export const DeleteCategory = async (categoryId) => {
     return Category.data;
 };
 //
-// export const detailBook = async (bookId) => {
-//     const book = await axiosInstance.get(`${API_URL}/book_detail/${bookId}`, {
-//     });
-//     return book.data;
-// };
+export const detailCategory = async (categoryId) => {
+    const category = await axiosInstance.get(`${API_URL}/category_detail/${categoryId}`, {});
+    return category.data;
+};
 //
-// export const UpdateBookApi = async (bookDate) => {
-//     const response = await axiosInstance.put(
-//         `${API_URL}/update_book/${bookDate?.bookId}`,
-//         {
-//             name: bookDate.name,
-//             auther: bookDate.auther,
-//             quantity: bookDate.quantity,
-//         },
-//     );
-//     return response.data;
-// };
+export const UpdateCategoryApi = async (categoryDate) => {
+    const response = await axiosInstance.put(
+        `${API_URL}/update_category/${categoryDate?.categoryId}`,
+        {
+            name_uz: categoryDate.name_uz,
+            name_ru: categoryDate.name_ru,
+            name_en: categoryDate.name_en,
+        },
+    );
+    return response.data;
+};
