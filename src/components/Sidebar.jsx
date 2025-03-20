@@ -46,7 +46,7 @@ function Sidebar({isOpen}) {
             title: "Faculty",
             items: [
                 {icon: RiFolderAddLine, label: "Fakultet qo'shish", path: "/create-faculty"},
-                {icon: CiViewList, label: "Hamma fakultetlar", path: "/schedule"},
+                {icon: CiViewList, label: "Hamma fakultetlar", path: "/list-faculty"},
             ],
         },
         {
@@ -57,6 +57,22 @@ function Sidebar({isOpen}) {
                 {icon: CiViewList, label: "Hamma kategoriyalar", path: "/list-category"},
             ],
         },
+        {
+            id: "department",
+            title: "Kafedralar",
+            items: [
+                {icon: RiFolderAddLine, label: "Kafedra qo'shish", path: "/create-department"},
+                {icon: CiViewList, label: "Hamma kafedralar", path: "/list-department"},
+            ],
+        },
+        {
+            id: "category_page",
+            title: "Kategoriya page",
+            items: [
+                {icon: RiFolderAddLine, label: "Kategoriya page qo'shish", path: "/create-category-page"},
+                // {icon: CiViewList, label: "Hamma kategoriya pagelar", path: "/list-department"},
+            ],
+        }
         // {
         //     id: "academics",
         //     title: "O'quv jarayoni",
