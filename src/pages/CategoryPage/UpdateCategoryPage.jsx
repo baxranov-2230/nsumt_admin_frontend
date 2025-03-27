@@ -1,37 +1,33 @@
-import React, {useEffect, lazy, useRef, useState, useMemo} from "react";
-import {useFormik} from "formik";
+import React, {useEffect, useMemo, useRef} from "react";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
-import {useNavigate} from "react-router-dom";
-import {useMutation, useQuery} from "@tanstack/react-query";
+import { useNavigate, useParams } from "react-router-dom";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { detailCategoryPage, UpdateCategoryPageApi} from "../../Api/CategoryPageApi.jsx";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { GetAllCategory} from "../../Api/CategoryApi.jsx";
 import JoditEditor from "jodit-react";
-import { FaFilePdf } from "react-icons/fa";
-
 const SITE_URL = import.meta.env.VITE_API_URL;
 
-import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
-
-import {GetAllCategory} from "../../Api/CategoryApi.jsx";
-import {CreateCategoryPageApi} from "../../Api/CategoryPageApi.jsx";
-
-
-// const JoditEditor = lazy(() => import("jodit-react"));
-
-
-function CreateCategoryPage() {
+function UpdateCategoryPage() {
+    const { categoryPageId } = useParams();
     const navigate = useNavigate();
-
-
     const editorRef = useRef(null);
-    const {isError, isLoading, data, error, refetch} = useQuery({
+    const { isError, isLoading, data: data_category, error, refetch } = useQuery({
         queryKey: ["list-category"],
         queryFn: GetAllCategory,
     });
+
+    const { data } = useQuery({
+        queryKey: ["category-page-detail"],
+        queryFn: () => detailCategoryPage(categoryPageId),
+    });
     const categoryPageMutation = useMutation({
-        mutationKey: ["create-category-page"],
-        mutationFn: CreateCategoryPageApi,
+        mutationKey: ["update-category-page"],
+        mutationFn: UpdateCategoryPageApi,
         onSuccess: (data) => {
-            toast.success(data.message || "Kategoriya page muvaffaqiyatli yaratildi");
+            toast.success(data.message || "Page muvaffaqiyatli o'zgartirildi");
         },
         onError: (error) => {
             toast.error(error.message || "Xatolik yuz berdi");
@@ -39,17 +35,18 @@ function CreateCategoryPage() {
     });
     const formik = useFormik({
         initialValues: {
-            name_uz: "",
-            name_ru: "",
-            name_en: "",
-            title_uz: "",
-            title_ru: "",
-            title_en: "",
-            text_uz: "",
-            text_ru: "",
-            text_en: "",
-            categoryId: "",
+            name_uz: data?.name_uz || "",
+            name_ru: data?.name_ru || "",
+            name_en: data?.name_en || "",
+            title_uz: data?.title_uz || "",
+            title_ru: data?.title_ru || "",
+            title_en: data?.title_en || "",
+            text_uz: data?.text_uz || "",
+            text_ru: data?.text_ru || "",
+            text_en: data?.text_en || "",
+            categoryId: data?.category_id || "",
         },
+        enableReinitialize: true,
         validationSchema: Yup.object({
             name_uz: Yup.string().required("!!! To'ldirish shart"),
             name_ru: Yup.string().required("!!! To'ldirish shart"),
@@ -60,7 +57,7 @@ function CreateCategoryPage() {
             text_uz: Yup.string().required("!!! To'ldirish shart"),
             text_ru: Yup.string().required("!!! To'ldirish shart"),
             text_en: Yup.string().required("!!! To'ldirish shart"),
-            categoryId: Yup.string().required("Fakultetni tanlash shart"),
+            // categoryId: Yup.string().required("!!! To'ldirish shart"),
         }),
         onSubmit: (values) => {
             // setFormData(values);
@@ -75,10 +72,19 @@ function CreateCategoryPage() {
                 text_ru: values.text_ru,
                 text_en: values.text_en,
                 categoryId: values.categoryId,
+                categoryPageId,
             };
             categoryPageMutation.mutate(categoryPageDate);
         },
     });
+
+    const isSuccess = categoryPageMutation.isSuccess;
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate("/list-category-page");
+        }
+    }, [navigate, isSuccess]);
     const config = useMemo(() => ({
         readonly: false,
         height: 300,
@@ -168,16 +174,9 @@ function CreateCategoryPage() {
         },
 
     }), []);
-    const isSuccess = categoryPageMutation.isSuccess;
-    useEffect(() => {
-        if (isSuccess) {
-            navigate("/list-category-page");
-        }
-    }, [navigate, isSuccess]);
-
     return (
         <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800">Kafedra qo'shish</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Pageni o'zgartirish</h2>
 
             <div className="bg-white rounded-lg shadow">
                 <div className="p-4 border-b bg-gray-50  ">
@@ -185,69 +184,65 @@ function CreateCategoryPage() {
                         onSubmit={formik.handleSubmit}
                         className="grid grid-cols-1 gap-3"
                     >
-
-                        <div className="w-full flex gap-3">
-                            <div className="w-1/3">
-                                <label
-                                    htmlFor="name_uz"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                >
-                                    Sub kategory uzb nomi
-                                </label>
-                                <input
-                                    type="text"
-                                    id="name_uz"
-                                    name="name_uz"
-                                    {...formik.getFieldProps("name_uz")}
-                                    className="block w-full p-4  text-gray-900 border border-gray-300 rounded-lg bg-white text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                />
-                            </div>
-                            <div className="w-1/3">
-                                <label
-                                    htmlFor="name_ru"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                >
-                                    Sub kategory rus nomi
-                                </label>
-                                <input
-                                    type="text"
-                                    id="name_ru"
-                                    name="name_ru"
-                                    {...formik.getFieldProps("name_ru")}
-                                    className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-white text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                />
-                            </div>
-                            <div className="w-1/3">
-                                <label
-                                    htmlFor="name_en"
-                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                >
-                                    Sub kategory eng nomi
-                                </label>
-                                <input
-                                    type="text"
-                                    id="name_en"
-                                    name="name_en"
-                                    {...formik.getFieldProps("name_en")}
-                                    className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-white text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                />
-                            </div>
+                        <div className="w-full">
+                            <label
+                                htmlFor="name_uz"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                O'zgartirilayotgan page uzb nomi
+                            </label>
+                            <input
+                                type="text"
+                                id="name_uz"
+                                name="name_uz"
+                                {...formik.getFieldProps("name_uz")}
+                                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            />
                         </div>
-
+                        <div className="w-full">
+                            <label
+                                htmlFor="name_ru"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                O'zgartirilayotgan page rus nomi
+                            </label>
+                            <input
+                                type="text"
+                                id="name_ru"
+                                name="name_ru"
+                                {...formik.getFieldProps("name_ru")}
+                                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            />
+                        </div>
+                        <div className="w-full">
+                            <label
+                                htmlFor="name_en"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                O'zgartirilayotgan page eng nomi
+                            </label>
+                            <input
+                                type="text"
+                                id="name_en"
+                                name="name_en"
+                                {...formik.getFieldProps("name_en")}
+                                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            />
+                        </div>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Kategoriyani tanlash</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Kategory</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
                                 value={formik.values.categoryId}
-                                label="Fakultet"
+                                label="Kategory"
                                 name="categoryId"
                                 onChange={formik.handleChange}
                             >
                                 {isLoading ? (
                                     <MenuItem disabled>Loading...</MenuItem>
                                 ) : (
-                                    data?.map((category) => (
+                                    data_category?.map((category) => (
                                         <MenuItem key={category?.category_id} value={category?.category_id}>
                                             {category?.category_name_uz}
                                         </MenuItem>
@@ -264,7 +259,6 @@ function CreateCategoryPage() {
                                 config={config}
                                 value={formik.values.title_uz}
                                 onChange={(value) => {
-
                                     formik.setFieldValue("title_uz", value);
                                 }}
                             />
@@ -351,4 +345,4 @@ function CreateCategoryPage() {
     );
 }
 
-export default CreateCategoryPage;
+export default UpdateCategoryPage;

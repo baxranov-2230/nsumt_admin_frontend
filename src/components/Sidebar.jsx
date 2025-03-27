@@ -69,8 +69,8 @@ function Sidebar({isOpen}) {
             id: "category_page",
             title: "Kategoriya page",
             items: [
-                {icon: RiFolderAddLine, label: "Kategoriya page qo'shish", path: "/create-category-page"},
-                // {icon: CiViewList, label: "Hamma kategoriya pagelar", path: "/list-department"},
+                {icon: RiFolderAddLine, label: "Page qo'shish", path: "/create-category-page"},
+                {icon: CiViewList, label: "Hamma pagelar", path: "/list-category-page"},
             ],
         }
         // {

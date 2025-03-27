@@ -1,6 +1,5 @@
 import axios from "axios";
 
-import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
 
 import { jwtDecode } from "jwt-decode";

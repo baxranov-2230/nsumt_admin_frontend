@@ -32,6 +32,8 @@ import CreateDepartment from "./pages/Department/CreateDepartment.jsx";
 import ListDepartment from "./pages/Department/ListDepartment.jsx";
 import UpdateDepartment from "./pages/Department/UpdateDepartment.jsx";
 import CreateCategoryPage from "./pages/CategoryPage/CreateCategoryPage.jsx";
+import ListCategoryPage from "./pages/CategoryPage/ListCategoryPage.jsx";
+import UpdateCategoryPage from "./pages/CategoryPage/UpdateCategoryPage.jsx";
 
 function ProtectedRoute({children}) {
     const token = JSON.parse(localStorage.getItem("token"));
@@ -51,7 +53,7 @@ function App() {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const location = useLocation(); // Get current route location
     const isLoginPage = location.pathname === "/login";
-    const token = JSON.parse(localStorage.getItem("token"));
+
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -232,6 +234,22 @@ function App() {
                             element={
                                 <ProtectedRoute>
                                     <CreateCategoryPage/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/list-category-page"
+                            element={
+                                <ProtectedRoute>
+                                    <ListCategoryPage/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/update-category-page/:categoryPageId"
+                            element={
+                                <ProtectedRoute>
+                                    <UpdateCategoryPage/>
                                 </ProtectedRoute>
                             }
                         />

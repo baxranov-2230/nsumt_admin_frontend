@@ -1,6 +1,4 @@
 import axios from "axios";
-
-// const API_URL = "http://127.0.0.2:8000/v1/user";
 const API_URL =  import.meta.env.VITE_API_URL;
 import axiosInstance from "./axiosinstance";
 
@@ -42,6 +40,7 @@ export const LoginApi = async (loginDate) => {
     return response.data;
 };
 export const logout = async () => {
+    const token = JSON.parse(localStorage.getItem("token"));
 
     try {
         const response = axiosInstance.put(
@@ -53,7 +52,7 @@ export const logout = async () => {
                 },
             }
         );
-        console.log(response.data);
+
         localStorage.removeItem("token");
         return response.data;
     } catch (error) {
