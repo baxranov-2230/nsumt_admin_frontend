@@ -25,7 +25,9 @@ function CreateCategory() {
         }), onSubmit: (values) => {
             // setFormData(values);
             const categoryDate = {
-                name_uz: values.name_uz, name_ru: values.name_ru, name_en: values.name_en,
+                name_uz: values.name_uz,
+                name_ru: values.name_ru,
+                name_en: values.name_en,
             };
             categoryMutation.mutate(categoryDate);
         },

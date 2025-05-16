@@ -5,9 +5,8 @@ import toast from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import JoditEditor from "jodit-react";
-import { FaFilePdf } from "react-icons/fa";
 
-const SITE_URL = import.meta.env.VITE_API_URL;
+const SITE_URL = import.meta.env.VITE_SITE_URL;
 
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
@@ -83,6 +82,16 @@ function CreateCategoryPage() {
         readonly: false,
         height: 300,
         toolbarButtonSize: "middle",
+        style: {
+            table: {
+                border: '1px solid #ccc',
+                'border-collapse': 'collapse'
+            },
+            'td, th': {
+                border: '1px solid #ccc',
+                padding: '5px'
+            }
+        },
         uploader: {
             url: `${SITE_URL}/upload`,
             insertImageAsBase64URI: false,
@@ -159,11 +168,7 @@ function CreateCategoryPage() {
                     this.s.insertHTML(htmlContent); // Mavjud kontentga qo‘shish
                 }
 
-                // if (data.files && data.files[0]) {
-                //     const htmlContent = `<img src="${data.files[0]}" alt="Yuklangan rasm">`;
-                //     console.log("HTML Content:", htmlContent);
-                //     this.s.insertHTML(htmlContent); // Mavjud kontentga qo‘shish
-                // }
+
             },
         },
 

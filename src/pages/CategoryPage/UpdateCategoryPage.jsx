@@ -89,6 +89,16 @@ function UpdateCategoryPage() {
         readonly: false,
         height: 300,
         toolbarButtonSize: "middle",
+        style: {
+            table: {
+                border: '1px solid #ccc',
+                'border-collapse': 'collapse'
+            },
+            'td, th': {
+                border: '1px solid #ccc',
+                padding: '5px'
+            }
+        },
         uploader: {
             url: `${SITE_URL}/upload`,
             insertImageAsBase64URI: false,
