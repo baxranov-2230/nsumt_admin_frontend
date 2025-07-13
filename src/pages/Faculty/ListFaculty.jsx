@@ -9,7 +9,6 @@ const SITE_URL = import.meta.env.VITE_SITE_URL;
 
 
 
-
 function ListFaculty() {
     const [isModalOpen, setIsModalOpen] = useState(null);
     const {isError, isSuccess, isLoading, data, error, refetch} = useQuery({

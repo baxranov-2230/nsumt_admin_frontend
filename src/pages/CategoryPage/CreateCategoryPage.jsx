@@ -7,6 +7,7 @@ import {useMutation, useQuery} from "@tanstack/react-query";
 import JoditEditor from "jodit-react";
 
 const SITE_URL = import.meta.env.VITE_SITE_URL;
+const API_URL = import.meta.env.VITE_API_URL;
 
 import {FormControl, InputLabel, MenuItem, Select} from "@mui/material";
 
@@ -93,7 +94,7 @@ function CreateCategoryPage() {
             }
         },
         uploader: {
-            url: `${SITE_URL}/upload`,
+            url: `${API_URL}/upload`,
             insertImageAsBase64URI: false,
             imagesExtensions: ["jpg", "png", "jpeg", "gif"],
             method: "POST",

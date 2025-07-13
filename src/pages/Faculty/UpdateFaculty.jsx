@@ -11,11 +11,9 @@ const SITE_URL = "http://127.0.0.2:8000";
 
 function UpdateFaculty() {
     const {facultyId} = useParams();
-    // console.log(categoryId);
+
     const navigate = useNavigate();
-    // const {isError, isSuccess, isLoading, data, error, refetch} = useQuery({
-    //     queryKey: ["list-faculty"], queryFn: GetAllFaculty,
-    // });
+
     const {data} = useQuery({
         queryKey: ["faculty-detail"],
         queryFn: () => detailFaculty(facultyId),
