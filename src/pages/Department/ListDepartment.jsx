@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import React, {useState} from "react";
+import {useQuery, useMutation} from "@tanstack/react-query";
 
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
-import { FaRegEdit } from "react-icons/fa";
-import { MdDelete } from "react-icons/md";
-import { DeleteDepartment, GetAllDepartment } from "../../Api/DepartmentApi";
+import {Link} from "react-router-dom";
+import {FaRegEdit} from "react-icons/fa";
+import {MdDelete} from "react-icons/md";
+import {DeleteDepartment, GetAllDepartment} from "../../Api/DepartmentApi";
 
 function ListDepartment() {
     const [isModalOpen, setIsModalOpen] = useState(null);
-    const { isError, isSuccess, isLoading, data, error, refetch } = useQuery({
+    const {isError, isSuccess, isLoading, data, error, refetch} = useQuery({
         queryKey: ["list-department"],
         queryFn: GetAllDepartment,
     });
@@ -44,7 +44,12 @@ function ListDepartment() {
 
     return (
         <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800">Kafedralar ro'yxati</h2>
+            <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-gray-800">Kafedralar</h2>
+                <Link to="/create-department" className="btn btn-primary">
+                    Yangi fakultet
+                </Link>
+            </div>
 
             <div className="bg-white rounded-lg shadow">
                 <div className="p-4">
@@ -74,17 +79,18 @@ function ListDepartment() {
                                                 to={`/update-department/${kafedra?.department_id}`}
                                             >
                                                 <button>
-                                                    <FaRegEdit className="text-2xl text-[#3697A5]" />
+                                                    <FaRegEdit className="text-2xl text-[#3697A5]"/>
                                                 </button>
                                             </Link>
                                             <button
                                                 className="flex items-center justify-start  "
                                                 onClick={() => handleDeleteClick(kafedra?.department_id)}
                                             >
-                                                <MdDelete className="text-2xl text-red-600" />
+                                                <MdDelete className="text-2xl text-red-600"/>
                                             </button>
                                             {isModalOpen === kafedra?.department_id && (
-                                                <div className="fixed inset-0 flex items-center justify-center bg-gray-500/50">
+                                                <div
+                                                    className="fixed inset-0 flex items-center justify-center bg-gray-500/50">
                                                     <div className="bg-white p-6 rounded-lg shadow-lg">
                                                         <h2 className="text-lg font-semibold mb-4">
                                                             Haqiqatan ham o‘chirmoqchimisiz?

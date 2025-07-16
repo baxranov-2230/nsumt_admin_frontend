@@ -39,7 +39,12 @@ function ListFaculty() {
     };
 
     return (<div className="space-y-6">
-        <h2 className="text-2xl font-bold text-gray-800">Fakultetlar ro'yxati</h2>
+       <div className="flex items-center justify-between">
+           <h2 className="text-2xl font-bold text-gray-800">Fakultetlar ro'yxati</h2>
+           <Link to="/create-faculty" className="btn btn-primary">
+               Yangi fakultet
+           </Link>
+       </div>
 
         <div className="bg-white rounded-lg shadow">
             <div className="p-4">

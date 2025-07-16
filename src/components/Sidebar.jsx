@@ -1,27 +1,17 @@
 import React, {useState} from "react";
 import {NavLink, useLocation} from "react-router-dom";
 import {RiFolderAddLine} from "react-icons/ri";
-import { CiViewList } from "react-icons/ci";
+import {CiViewList} from "react-icons/ci";
 import {
     Home,
-    BookOpen,
-    Calendar,
-    Users,
-    FileText,
-    Settings,
-    GraduationCap,
-    ClipboardList,
-    Award,
-    BookCheck,
-    ScrollText,
-    Building2,
-    CreditCard,
-    UserCircle,
-    Wallet,
     ChevronRight,
     ChevronDown,
 
 } from "lucide-react";
+import { SiHomeassistantcommunitystore } from "react-icons/si";
+import { TbCategoryPlus } from "react-icons/tb";
+import { FcDepartment } from "react-icons/fc";
+import { RiPagesFill } from "react-icons/ri";
 
 function Sidebar({isOpen}) {
     const location = useLocation();
@@ -42,35 +32,35 @@ function Sidebar({isOpen}) {
             items: [{icon: Home, label: "Bosh sahifa", path: "/"}],
         },
         {
-            id: "academic",
-            title: "Faculty",
+            id: "faculty",
+            // title: "Faculty",
             items: [
-                {icon: RiFolderAddLine, label: "Fakultet qo'shish", path: "/create-faculty"},
-                {icon: CiViewList, label: "Hamma fakultetlar", path: "/list-faculty"},
+                // {icon: RiFolderAddLine, label: "Fakultet qo'shish", path: "/create-faculty"},
+                {icon: SiHomeassistantcommunitystore, label: "Fakultetlar", path: "/list-faculty"},
             ],
         },
         {
             id: "category",
-            title: "Category",
+            // title: "Category",
             items: [
-                {icon: RiFolderAddLine, label: "Kategory qo'shish", path: "/create-category"},
-                {icon: CiViewList, label: "Hamma kategoriyalar", path: "/list-category"},
+                // {icon: RiFolderAddLine, label: "Kategory qo'shish", path: "/create-category"},
+                {icon: TbCategoryPlus , label: "Kategoriyalar", path: "/list-category"},
             ],
         },
         {
             id: "department",
-            title: "Kafedralar",
+            // title: "Kafedralar",
             items: [
-                {icon: RiFolderAddLine, label: "Kafedra qo'shish", path: "/create-department"},
-                {icon: CiViewList, label: "Hamma kafedralar", path: "/list-department"},
+                // {icon: RiFolderAddLine, label: "Kafedra qo'shish", path: "/create-department"},
+                {icon: FcDepartment , label: "Kafedralar", path: "/list-department"},
             ],
         },
         {
             id: "category_page",
-            title: "Kategoriya page",
+            // title: "Kategoriya page",
             items: [
-                {icon: RiFolderAddLine, label: "Page qo'shish", path: "/create-category-page"},
-                {icon: CiViewList, label: "Hamma pagelar", path: "/list-category-page"},
+                // {icon: RiFolderAddLine, label: "Page qo'shish", path: "/create-category-page"},
+                {icon: RiPagesFill , label: "Kategoriya sahifalar", path: "/list-category-page"},
             ],
         }
         // {

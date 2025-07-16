@@ -44,7 +44,12 @@ function ListCategoryPage() {
 
     return (
         <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800">Pagelar ro'yxati</h2>
+            <div className="flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-gray-800">Kategoriya sahifalar</h2>
+                <Link to="/create-category-page" className="btn btn-primary">
+                    Yangi fakultet
+                </Link>
+            </div>
 
             <div className="bg-white rounded-lg shadow">
                 <div className="p-4">

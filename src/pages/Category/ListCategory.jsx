@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import {FaRegEdit} from "react-icons/fa";
 import {MdDelete} from "react-icons/md";
 
+
 function ListCategory() {
     const [isModalOpen, setIsModalOpen] = useState(null);
     const {isError, isSuccess, isLoading, data, error, refetch} = useQuery({
@@ -36,7 +37,12 @@ function ListCategory() {
     };
 
     return (<div className="space-y-6">
-        <h2 className="text-2xl font-bold text-gray-800">Kategoriyalar ro'yxati</h2>
+        <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-bold text-gray-800">Kategoriyalar</h2>
+            <Link to="/create-category" className="btn btn-primary">
+                Yangi fakultet
+            </Link>
+        </div>
 
         <div className="bg-white rounded-lg shadow">
             <div className="p-4">
