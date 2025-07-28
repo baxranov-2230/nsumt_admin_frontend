@@ -194,50 +194,52 @@ function UpdateCategoryPage() {
                         onSubmit={formik.handleSubmit}
                         className="grid grid-cols-1 gap-3"
                     >
-                        <div className="w-full">
-                            <label
-                                htmlFor="name_uz"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                                O'zgartirilayotgan page uzb nomi
-                            </label>
-                            <input
-                                type="text"
-                                id="name_uz"
-                                name="name_uz"
-                                {...formik.getFieldProps("name_uz")}
-                                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            />
-                        </div>
-                        <div className="w-full">
-                            <label
-                                htmlFor="name_ru"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                                O'zgartirilayotgan page rus nomi
-                            </label>
-                            <input
-                                type="text"
-                                id="name_ru"
-                                name="name_ru"
-                                {...formik.getFieldProps("name_ru")}
-                                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            />
-                        </div>
-                        <div className="w-full">
-                            <label
-                                htmlFor="name_en"
-                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                            >
-                                O'zgartirilayotgan page eng nomi
-                            </label>
-                            <input
-                                type="text"
-                                id="name_en"
-                                name="name_en"
-                                {...formik.getFieldProps("name_en")}
-                                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            />
+                        <div className="flex flex-col md:flex-row items-start space-y-6 md:space-y-0 md:space-x-6"  >
+                            <div className="w-1/3">
+                                <label
+                                    htmlFor="name_uz"
+                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >
+                                    O'zgartirilayotgan page uzb nomi
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name_uz"
+                                    name="name_uz"
+                                    {...formik.getFieldProps("name_uz")}
+                                    className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                />
+                            </div>
+                            <div className="w-1/3">
+                                <label
+                                    htmlFor="name_ru"
+                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >
+                                    O'zgartirilayotgan page rus nomi
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name_ru"
+                                    name="name_ru"
+                                    {...formik.getFieldProps("name_ru")}
+                                    className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                />
+                            </div>
+                            <div className="w-1/3">
+                                <label
+                                    htmlFor="name_en"
+                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >
+                                    O'zgartirilayotgan page eng nomi
+                                </label>
+                                <input
+                                    type="text"
+                                    id="name_en"
+                                    name="name_en"
+                                    {...formik.getFieldProps("name_en")}
+                                    className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                />
+                            </div>
                         </div>
                         <FormControl fullWidth>
                             <InputLabel id="demo-simple-select-label">Kategory</InputLabel>
@@ -261,46 +263,51 @@ function UpdateCategoryPage() {
                             </Select>
                         </FormControl>
                         <div className="w-full">
-                            <label htmlFor="title_uz" className="text-xl mb-2 mt-7">
+                            <label
+                                htmlFor="title_uz"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
                                 Post uzbekcha mavzusini kiriting
                             </label>
-                            <JoditEditor
-                                ref={editorRef}
-                                config={config}
-                                value={formik.values.title_uz}
-                                onChange={(value) => {
-                                    formik.setFieldValue("title_uz", value);
-                                }}
+                            <input
+                                type="text"
+                                id="title_uz"
+                                name="title_uz"
+                                {...formik.getFieldProps("title_uz")}
+                                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             />
                         </div>
                         <div className="w-full">
-                            <label htmlFor="title_ru" className="text-xl mb-2 mt-7">
-                                Post ruscha mavzusini kiriting
+                            <label
+                                htmlFor="title_ru"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                Post uzbekcha mavzusini kiriting
                             </label>
-                            <JoditEditor
-                                ref={editorRef}
-                                config={config}
-                                value={formik.values.title_ru}
-                                onChange={(value) => {
-
-                                    formik.setFieldValue("title_ru", value);
-                                }}
+                            <input
+                                type="text"
+                                id="title_ru"
+                                name="title_ru"
+                                {...formik.getFieldProps("title_ru")}
+                                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             />
                         </div>
                         <div className="w-full">
-                            <label htmlFor="title_en" className="text-xl mb-2 mt-7">
-                                Post englizcha mavzusini kiriting
+                            <label
+                                htmlFor="title_en"
+                                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                            >
+                                Post uzbekcha mavzusini kiriting
                             </label>
-                            <JoditEditor
-                                ref={editorRef}
-                                config={config}
-                                value={formik.values.title_en}
-                                onChange={(value) => {
-
-                                    formik.setFieldValue("title_en", value);
-                                }}
+                            <input
+                                type="text"
+                                id="title_en"
+                                name="title_en"
+                                {...formik.getFieldProps("title_en")}
+                                className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-base focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             />
                         </div>
+
                         <div className="w-full">
                             <label htmlFor="text_uz" className="text-xl mb-2 mt-7">
                                 Post uzbekcha matnini kiriting
