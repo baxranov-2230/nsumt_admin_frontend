@@ -62,6 +62,12 @@ function Sidebar({isOpen}) {
                 // {icon: RiFolderAddLine, label: "Page qo'shish", path: "/create-category-page"},
                 {icon: RiPagesFill , label: "Kategoriya sahifalar", path: "/list-category-page"},
             ],
+        },
+        {
+            id: "news_page",
+            items: [
+                {icon: RiPagesFill , label: "Yangiliklar", path: "/list-news-page"},
+            ],
         }
         // {
         //     id: "academics",

@@ -34,6 +34,9 @@ import UpdateDepartment from "./pages/Department/UpdateDepartment.jsx";
 import CreateCategoryPage from "./pages/CategoryPage/CreateCategoryPage.jsx";
 import ListCategoryPage from "./pages/CategoryPage/ListCategoryPage.jsx";
 import UpdateCategoryPage from "./pages/CategoryPage/UpdateCategoryPage.jsx";
+import ListNewsPage from "./pages/NewsPage/ListNewsPage.jsx";
+import CreateNews from "./pages/NewsPage/CreateNews.jsx";
+import UpdateNews from "./pages/NewsPage/UpdateNews.jsx";
 
 function ProtectedRoute({children}) {
     const token = JSON.parse(localStorage.getItem("token"));
@@ -253,7 +256,30 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
-
+                        <Route
+                            path="/create-news-page"
+                            element={
+                                <ProtectedRoute>
+                                    <CreateNews/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/list-news-page"
+                            element={
+                                <ProtectedRoute>
+                                    <ListNewsPage/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/update-news-page/:newsId"
+                            element={
+                                <ProtectedRoute>
+                                    <UpdateNews/>
+                                </ProtectedRoute>
+                            }
+                        />
                     </Routes>
                     <Toaster/>
                 </main>

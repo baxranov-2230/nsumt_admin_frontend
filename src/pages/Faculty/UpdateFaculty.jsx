@@ -6,7 +6,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useMutation, useQuery} from "@tanstack/react-query";
 import {detailFaculty, UpdateFacultyApi, GetAllFaculty} from "../../Api/FacultyApi.jsx";
 
-const SITE_URL = "http://127.0.0.2:8000";
+const SITE_URL = import.meta.env.VITE_SITE_URL;
 
 
 function UpdateFaculty() {

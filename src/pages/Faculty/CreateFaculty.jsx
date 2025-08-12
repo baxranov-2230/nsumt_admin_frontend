@@ -5,14 +5,16 @@ import toast from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
 import {useMutation} from "@tanstack/react-query";
 import {CreateFacultyApi} from "../../Api/FacultyApi.jsx";
+import {CreateNewsApi} from "../../Api/NewsPageApi.jsx";
 
 function CreateFaculty() {
     const navigate = useNavigate();
+
     const facultyMutation = useMutation({
-        mutationKey: ["create-faculty"],
+        mutationKey: ["create-news"],
         mutationFn: CreateFacultyApi,
         onSuccess: (data) => {
-            toast.success(data.message || "Fakultet muvaffaqiyatli yaratildi");
+            toast.success(data.message || "Yangilik muvaffaqiyatli yaratildi");
         },
         onError: (error) => {
             toast.error(error.message || "Xatolik yuz berdi");
@@ -20,9 +22,9 @@ function CreateFaculty() {
     });
     const formik = useFormik({
         initialValues: {
-            name_uz: "",
-            name_ru: "",
-            name_en: "",
+            title_uz: "",
+            title_ru: "",
+            title_en: "",
             faculty_icon: null,
         },
         validationSchema: Yup.object({
