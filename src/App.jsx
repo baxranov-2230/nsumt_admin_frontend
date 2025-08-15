@@ -37,6 +37,12 @@ import UpdateCategoryPage from "./pages/CategoryPage/UpdateCategoryPage.jsx";
 import ListNewsPage from "./pages/NewsPage/ListNewsPage.jsx";
 import CreateNews from "./pages/NewsPage/CreateNews.jsx";
 import UpdateNews from "./pages/NewsPage/UpdateNews.jsx";
+import CreateFacultyPage from "./pages/FacultyPage/CreateFacultyPage.jsx";
+import ListFacultyPage from "./pages/FacultyPage/ListFacultyPage.jsx";
+import UpdateFacultyPage from "./pages/FacultyPage/UpdateFacultyPage.jsx";
+import CreateDepartmentPage from "./pages/DepartmentPage/CreateDepartmentPage.jsx";
+import ListDepartmentPage from "./pages/DepartmentPage/ListDepartmentPage.jsx";
+import UpdateDepartmentPage from "./pages/DepartmentPage/UpdateDepartmentPage.jsx";
 
 function ProtectedRoute({children}) {
     const token = JSON.parse(localStorage.getItem("token"));
@@ -280,7 +286,56 @@ function App() {
                                 </ProtectedRoute>
                             }
                         />
+                        <Route
+                            path="/create-faculty-page"
+                            element={
+                                <ProtectedRoute>
+                                    <CreateFacultyPage/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/list-faculty-page"
+                            element={
+                                <ProtectedRoute>
+                                    <ListFacultyPage/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/update-faculty-page/:facultyPageId"
+                            element={
+                                <ProtectedRoute>
+                                    <UpdateFacultyPage/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/create-department-page"
+                            element={
+                                <ProtectedRoute>
+                                    <CreateDepartmentPage/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/list-department-page"
+                            element={
+                                <ProtectedRoute>
+                                    <ListDepartmentPage/>
+                                </ProtectedRoute>
+                            }
+                        />
+                        <Route
+                            path="/update-department-page/:departmentPageId"
+                            element={
+                                <ProtectedRoute>
+                                    <UpdateDepartmentPage/>
+                                </ProtectedRoute>
+                            }
+                        />
                     </Routes>
+
                     <Toaster/>
                 </main>
             </div>

@@ -4,30 +4,32 @@ import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { detailCategoryPage, UpdateCategoryPageApi} from "../../Api/CategoryPageApi.jsx";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { GetAllCategory} from "../../Api/CategoryApi.jsx";
 import JoditEditor from "jodit-react";
-import striptags from "striptags";
+import {GetAllFaculty} from "../../Api/FacultyApi.jsx";
+import {detailFacultyPage, UpdateFacultyPageApi} from "../../Api/FacultyPageApi.jsx";
+import {GetAllDepartment} from "../../Api/DepartmentApi.jsx";
+import {detailDepartmentPage, UpdateDepartmentPageApi} from "../../Api/DepartmentPageApi.jsx";
+
+
 const SITE_URL = import.meta.env.VITE_API_URL;
 
-
-function UpdateCategoryPage() {
-    const { categoryPageId } = useParams();
+function UpdateDepartmentPage() {
+    const { departmentPageId } = useParams();
     const navigate = useNavigate();
     const editorRef = useRef(null);
-    const { isError, isLoading, data: data_category, error, refetch } = useQuery({
-        queryKey: ["list-category"],
-        queryFn: GetAllCategory,
+    const { isError, isLoading, data: data_department, error, refetch } = useQuery({
+        queryKey: ["list-department"],
+        queryFn: GetAllDepartment,
     });
 
     const { data } = useQuery({
-        queryKey: ["category-page-detail"],
-        queryFn: () => detailCategoryPage(categoryPageId),
+        queryKey: ["department-page-detail"],
+        queryFn: () => detailDepartmentPage(departmentPageId),
     });
-    const categoryPageMutation = useMutation({
-        mutationKey: ["update-category-page"],
-        mutationFn: UpdateCategoryPageApi,
+    const departmentPageMutation = useMutation({
+        mutationKey: ["update-department-page"],
+        mutationFn: UpdateDepartmentPageApi,
         onSuccess: (data) => {
             toast.success(data.message || "Page muvaffaqiyatli o'zgartirildi");
         },
@@ -40,13 +42,13 @@ function UpdateCategoryPage() {
             name_uz: data?.name_uz || "",
             name_ru: data?.name_ru || "",
             name_en: data?.name_en || "",
-            title_uz: striptags(data?.title_uz) || "",
-            title_ru: striptags(data?.title_ru) || "",
-            title_en: striptags(data?.title_en) || "",
+            title_uz: data?.title_uz || "",
+            title_ru: data?.title_ru || "",
+            title_en: data?.title_en || "",
             text_uz: data?.text_uz || "",
             text_ru: data?.text_ru || "",
             text_en: data?.text_en || "",
-            categoryId: data?.category_id || "",
+            departmentId: data?.department_id || "",
         },
         enableReinitialize: true,
         validationSchema: Yup.object({
@@ -62,8 +64,7 @@ function UpdateCategoryPage() {
             // categoryId: Yup.string().required("!!! To'ldirish shart"),
         }),
         onSubmit: (values) => {
-            // setFormData(values);
-            const categoryPageDate = {
+            const departmentPageData = {
                 name_uz: values.name_uz,
                 name_ru: values.name_ru,
                 name_en: values.name_en,
@@ -73,18 +74,18 @@ function UpdateCategoryPage() {
                 text_uz: values.text_uz,
                 text_ru: values.text_ru,
                 text_en: values.text_en,
-                categoryId: values.categoryId,
-                categoryPageId,
+                departmentId: values.departmentId,
+                departmentPageId,
             };
-            categoryPageMutation.mutate(categoryPageDate);
+            departmentPageMutation.mutate(departmentPageData);
         },
     });
 
-    const isSuccess = categoryPageMutation.isSuccess;
+    const isSuccess = departmentPageMutation.isSuccess;
 
     useEffect(() => {
         if (isSuccess) {
-            navigate("/list-category-page");
+            navigate("/list-department-page");
         }
     }, [navigate, isSuccess]);
     const config = useMemo(() => ({
@@ -188,7 +189,7 @@ function UpdateCategoryPage() {
     }), []);
     return (
         <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800">Pageni o'zgartirish</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Sahifani o'zgartirish</h2>
 
             <div className="bg-white rounded-lg shadow">
                 <div className="p-4 border-b bg-gray-50  ">
@@ -244,21 +245,21 @@ function UpdateCategoryPage() {
                             </div>
                         </div>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Kategory</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Kafedra</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={formik.values.categoryId}
-                                label="Kategory"
-                                name="categoryId"
+                                value={formik.values.departmentId}
+                                label="Department"
+                                name="departmentId"
                                 onChange={formik.handleChange}
                             >
                                 {isLoading ? (
                                     <MenuItem disabled>Loading...</MenuItem>
                                 ) : (
-                                    data_category?.map((category) => (
-                                        <MenuItem key={category?.category_id} value={category?.category_id}>
-                                            {category?.category_name_uz}
+                                    data_department?.map((department) => (
+                                        <MenuItem key={department?.department_id} value={department?.department_id}>
+                                            {department?.department_name_uz}
                                         </MenuItem>
                                     ))
                                 )}
@@ -364,4 +365,4 @@ function UpdateCategoryPage() {
     );
 }
 
-export default UpdateCategoryPage;
+export default UpdateDepartmentPage;

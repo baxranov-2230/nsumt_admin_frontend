@@ -1,7 +1,5 @@
 import React, {useState} from "react";
 import {NavLink, useLocation} from "react-router-dom";
-import {RiFolderAddLine} from "react-icons/ri";
-import {CiViewList} from "react-icons/ci";
 import {
     Home,
     ChevronRight,
@@ -12,6 +10,8 @@ import { SiHomeassistantcommunitystore } from "react-icons/si";
 import { TbCategoryPlus } from "react-icons/tb";
 import { FcDepartment } from "react-icons/fc";
 import { RiPagesFill } from "react-icons/ri";
+import { PiNewspaperClippingBold } from "react-icons/pi";
+import { FaPager } from "react-icons/fa6";
 
 function Sidebar({isOpen}) {
     const location = useLocation();
@@ -40,19 +40,17 @@ function Sidebar({isOpen}) {
             ],
         },
         {
+            id: "faculty_page",
+            items: [
+                {icon: FaPager , label: "Fakultet sahifalar", path: "/list-faculty-page"},
+            ],
+        },
+        {
             id: "category",
             // title: "Category",
             items: [
                 // {icon: RiFolderAddLine, label: "Kategory qo'shish", path: "/create-category"},
                 {icon: TbCategoryPlus , label: "Kategoriyalar", path: "/list-category"},
-            ],
-        },
-        {
-            id: "department",
-            // title: "Kafedralar",
-            items: [
-                // {icon: RiFolderAddLine, label: "Kafedra qo'shish", path: "/create-department"},
-                {icon: FcDepartment , label: "Kafedralar", path: "/list-department"},
             ],
         },
         {
@@ -64,11 +62,28 @@ function Sidebar({isOpen}) {
             ],
         },
         {
+            id: "department",
+            // title: "Kafedralar",
+            items: [
+                // {icon: RiFolderAddLine, label: "Kafedra qo'shish", path: "/create-department"},
+                {icon: FcDepartment , label: "Kafedralar", path: "/list-department"},
+            ],
+        },
+        {
+            id: "department_page",
+            // title: "Kafedralar",
+            items: [
+                // {icon: RiFolderAddLine, label: "Kafedra qo'shish", path: "/create-department"},
+                {icon: FcDepartment , label: "Kafedra sahifalari", path: "/list-department-page"},
+            ],
+        },
+        {
             id: "news_page",
             items: [
-                {icon: RiPagesFill , label: "Yangiliklar", path: "/list-news-page"},
+                {icon: PiNewspaperClippingBold , label: "Yangiliklar", path: "/list-news-page"},
             ],
-        }
+        },
+
         // {
         //     id: "academics",
         //     title: "O'quv jarayoni",

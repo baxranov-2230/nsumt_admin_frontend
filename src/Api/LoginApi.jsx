@@ -15,7 +15,7 @@ export const refreshAccessToken = async (refreshToken) => {
     });
     const { access_token, refresh_token } = response.data;
     saveTokens(access_token, refresh_token);
-    console.log("New -" + response.data.access_token);
+    // console.log("New -" + response.data.access_token);
     return response.data.access_token;
 };
 

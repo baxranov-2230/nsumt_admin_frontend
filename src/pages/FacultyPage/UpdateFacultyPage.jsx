@@ -4,30 +4,30 @@ import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { detailCategoryPage, UpdateCategoryPageApi} from "../../Api/CategoryPageApi.jsx";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { GetAllCategory} from "../../Api/CategoryApi.jsx";
 import JoditEditor from "jodit-react";
-import striptags from "striptags";
+import {GetAllFaculty} from "../../Api/FacultyApi.jsx";
+import {detailFacultyPage, UpdateFacultyPageApi} from "../../Api/FacultyPageApi.jsx";
+
+
 const SITE_URL = import.meta.env.VITE_API_URL;
 
-
-function UpdateCategoryPage() {
-    const { categoryPageId } = useParams();
+function UpdateFacultyPage() {
+    const { facultyPageId } = useParams();
     const navigate = useNavigate();
     const editorRef = useRef(null);
-    const { isError, isLoading, data: data_category, error, refetch } = useQuery({
-        queryKey: ["list-category"],
-        queryFn: GetAllCategory,
+    const { isError, isLoading, data: data_faculty, error, refetch } = useQuery({
+        queryKey: ["list-faculty"],
+        queryFn: GetAllFaculty,
     });
 
     const { data } = useQuery({
-        queryKey: ["category-page-detail"],
-        queryFn: () => detailCategoryPage(categoryPageId),
+        queryKey: ["faculty-page-detail"],
+        queryFn: () => detailFacultyPage(facultyPageId),
     });
-    const categoryPageMutation = useMutation({
-        mutationKey: ["update-category-page"],
-        mutationFn: UpdateCategoryPageApi,
+    const facultyPageMutation = useMutation({
+        mutationKey: ["update-faculty-page"],
+        mutationFn: UpdateFacultyPageApi,
         onSuccess: (data) => {
             toast.success(data.message || "Page muvaffaqiyatli o'zgartirildi");
         },
@@ -40,13 +40,13 @@ function UpdateCategoryPage() {
             name_uz: data?.name_uz || "",
             name_ru: data?.name_ru || "",
             name_en: data?.name_en || "",
-            title_uz: striptags(data?.title_uz) || "",
-            title_ru: striptags(data?.title_ru) || "",
-            title_en: striptags(data?.title_en) || "",
+            title_uz: data?.title_uz || "",
+            title_ru: data?.title_ru || "",
+            title_en: data?.title_en || "",
             text_uz: data?.text_uz || "",
             text_ru: data?.text_ru || "",
             text_en: data?.text_en || "",
-            categoryId: data?.category_id || "",
+            facultyId: data?.faculty_id || "",
         },
         enableReinitialize: true,
         validationSchema: Yup.object({
@@ -63,7 +63,7 @@ function UpdateCategoryPage() {
         }),
         onSubmit: (values) => {
             // setFormData(values);
-            const categoryPageDate = {
+            const facultyPageData = {
                 name_uz: values.name_uz,
                 name_ru: values.name_ru,
                 name_en: values.name_en,
@@ -73,18 +73,18 @@ function UpdateCategoryPage() {
                 text_uz: values.text_uz,
                 text_ru: values.text_ru,
                 text_en: values.text_en,
-                categoryId: values.categoryId,
-                categoryPageId,
+                facultyId: values.facultyId,
+                facultyPageId,
             };
-            categoryPageMutation.mutate(categoryPageDate);
+            facultyPageMutation.mutate(facultyPageData);
         },
     });
 
-    const isSuccess = categoryPageMutation.isSuccess;
+    const isSuccess = facultyPageMutation.isSuccess;
 
     useEffect(() => {
         if (isSuccess) {
-            navigate("/list-category-page");
+            navigate("/list-faculty-page");
         }
     }, [navigate, isSuccess]);
     const config = useMemo(() => ({
@@ -188,7 +188,7 @@ function UpdateCategoryPage() {
     }), []);
     return (
         <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-gray-800">Pageni o'zgartirish</h2>
+            <h2 className="text-2xl font-bold text-gray-800">Sahifani o'zgartirish o'zgartirish</h2>
 
             <div className="bg-white rounded-lg shadow">
                 <div className="p-4 border-b bg-gray-50  ">
@@ -244,21 +244,21 @@ function UpdateCategoryPage() {
                             </div>
                         </div>
                         <FormControl fullWidth>
-                            <InputLabel id="demo-simple-select-label">Kategory</InputLabel>
+                            <InputLabel id="demo-simple-select-label">Fakultet</InputLabel>
                             <Select
                                 labelId="demo-simple-select-label"
                                 id="demo-simple-select"
-                                value={formik.values.categoryId}
-                                label="Kategory"
-                                name="categoryId"
+                                value={formik.values.facultyId}
+                                label="Fakultet"
+                                name="facultyId"
                                 onChange={formik.handleChange}
                             >
                                 {isLoading ? (
                                     <MenuItem disabled>Loading...</MenuItem>
                                 ) : (
-                                    data_category?.map((category) => (
-                                        <MenuItem key={category?.category_id} value={category?.category_id}>
-                                            {category?.category_name_uz}
+                                    data_faculty?.map((faculty) => (
+                                        <MenuItem key={faculty?.faculty_id} value={faculty?.faculty_id}>
+                                            {faculty?.faculty_name_uz}
                                         </MenuItem>
                                     ))
                                 )}
@@ -364,4 +364,4 @@ function UpdateCategoryPage() {
     );
 }
 
-export default UpdateCategoryPage;
+export default UpdateFacultyPage;
