@@ -15,7 +15,7 @@ import {GetAllCategory} from "../../Api/CategoryApi.jsx";
 import {CreateCategoryPageApi} from "../../Api/CategoryPageApi.jsx";
 
 
-// const JoditEditor = lazy(() => import("jodit-react"));
+
 
 
 function CreateCategoryPage() {
@@ -99,15 +99,19 @@ function CreateCategoryPage() {
             imagesExtensions: ["jpg", "png", "jpeg", "gif"],
             method: "POST",
             format: "json",
-            prepareData: function (data) {
-                const formData = new FormData();
-                const file = data.get("files[0]");
-                if (file) {
-                    formData.append("upload_file", file);
-                } else {
-                    console.error("Fayl yo‘q yoki noto‘g‘ri format!");
-                }
+            prepareData: function (formData) {
+                const file = formData.get("files[0]");
+                formData.delete("files[0]");            // eski nomni o‘chirib tashlaymiz
+                formData.append("upload_file", file);   // backend kutayotgan nom
                 return formData;
+                // const formData = new FormData();
+                // const file = data.files[0];
+                // if (file) {
+                //     formData.append("upload_file", file);
+                // } else {
+                //     console.error("Fayl yo‘q yoki noto‘g‘ri format!");
+                // }
+                // return formData;
             },
             headers: {},
             isSuccess: function (resp) {

@@ -107,15 +107,19 @@ function UpdateFacultyPage() {
             imagesExtensions: ["jpg", "png", "jpeg", "gif"],
             method: "POST",
             format: "json",
-            prepareData: function (data) {
-                const formData = new FormData();
-                const file = data.get("files[0]");
-                if (file) {
-                    formData.append("upload_file", file);
-                } else {
-                    console.error("Fayl yo‘q yoki noto‘g‘ri format!");
-                }
+            prepareData: function (formData) {
+                const file = formData.get("files[0]");
+                formData.delete("files[0]");            // eski nomni o‘chirib tashlaymiz
+                formData.append("upload_file", file);   // backend kutayotgan nom
                 return formData;
+                // const formData = new FormData();
+                // const file = data.files[0];
+                // if (file) {
+                //     formData.append("upload_file", file);
+                // } else {
+                //     console.error("Fayl yo‘q yoki noto‘g‘ri format!");
+                // }
+                // return formData;
             },
             headers: {},
             isSuccess: function (resp) {
@@ -177,15 +181,12 @@ function UpdateFacultyPage() {
                     this.s.insertHTML(htmlContent); // Mavjud kontentga qo‘shish
                 }
 
-                // if (data.files && data.files[0]) {
-                //     const htmlContent = `<img src="${data.files[0]}" alt="Yuklangan rasm">`;
-                //     console.log("HTML Content:", htmlContent);
-                //     this.s.insertHTML(htmlContent); // Mavjud kontentga qo‘shish
-                // }
+
             },
         },
 
     }), []);
+
     return (
         <div className="space-y-6">
             <h2 className="text-2xl font-bold text-gray-800">Sahifani o'zgartirish o'zgartirish</h2>

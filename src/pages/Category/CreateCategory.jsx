@@ -22,6 +22,8 @@ function CreateCategory() {
             name_uz: Yup.string().required("!!! To'ldirish shart"),
             name_ru: Yup.string().required("!!! To'ldirish shart"),
             name_en: Yup.string().required("!!! To'ldirish shart"),
+
+
         }), onSubmit: (values) => {
             // setFormData(values);
             const categoryDate = {
@@ -30,6 +32,7 @@ function CreateCategory() {
                 name_en: values.name_en,
             };
             categoryMutation.mutate(categoryDate);
+
         },
     });
     const isSuccess = categoryMutation.isSuccess;

@@ -49,7 +49,7 @@ function CreateNews() {
                 text_uz: values.text_uz,
                 text_ru: values.text_ru,
                 text_en: values.text_en,
-                photo: values.photo
+                photo: values.photo,
             };
 
             console.log(values);
@@ -82,15 +82,19 @@ function CreateNews() {
             imagesExtensions: ["jpg", "png", "jpeg", "gif"],
             method: "POST",
             format: "json",
-            prepareData: function (data) {
-                const formData = new FormData();
-                const file = data.get("files[0]");
-                if (file) {
-                    formData.append("upload_file", file);
-                } else {
-                    console.error("Fayl yo‘q yoki noto‘g‘ri format!");
-                }
+            prepareData: function (formData) {
+                const file = formData.get("files[0]");
+                formData.delete("files[0]");            // eski nomni o‘chirib tashlaymiz
+                formData.append("upload_file", file);   // backend kutayotgan nom
                 return formData;
+                // const formData = new FormData();
+                // const file = data.files[0];
+                // if (file) {
+                //     formData.append("upload_file", file);
+                // } else {
+                //     console.error("Fayl yo‘q yoki noto‘g‘ri format!");
+                // }
+                // return formData;
             },
             headers: {},
             isSuccess: function (resp) {
@@ -239,6 +243,7 @@ function CreateNews() {
                             }}
                         />
                     </div>
+
                     <div className="w-full">
                         <label
                             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"

@@ -70,8 +70,8 @@ function ListFacultyPage() {
                             return (
                                 <tr className="border-t" key={page?.id}>
                                     <td className="p-3 ">{index + 1}</td>
-                                    <td className="p-3 ">{page?.name_uz}</td>
-                                    <td className="p-3 ">{page?.faculty?.name_uz}</td>
+                                    <td className="p-3 ">{page?.page_name_uz}</td>
+                                    <td className="p-3 ">{page?.faculty_name_uz}</td>
 
                                     <td className="p-3">
                                         <div className="flex justify-center">
