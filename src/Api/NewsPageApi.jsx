@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const API_URL =  import.meta.env.VITE_API_URL;
-import axiosInstance from "./axiosinstance";
+import axiosInstance from "./axiosInstance";
 
 
 export const GetAllNews = async () => {
